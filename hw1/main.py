@@ -1,28 +1,28 @@
 import ctypes
+from ctypes import c_int, c_char_p, CDLL
 import os
-import expression as e
 
+l =  CDLL("./equation.so")
+l.parseEq.argtypes = [
+    c_char_p,
+    ctypes.POINTER(c_int), ctypes.POINTER(c_int), ctypes.POINTER(c_int)
+]
+l.parseEq.restype = None
 
-_LIB_NAME = "libequation.so"
-_LIB_PATH = os.path.join(os.path.dirname(__file__), _LIB_NAME)
-if not os.path.exists(_LIB_PATH):
-    raise OSError(f"Shared library not found: {_LIB_PATH}")
+equations = [
+    "3 + x + x**2",
+    "10 + (x − 4)**2",
+    "2x**2 − 8x + 12"
+]
 
-_equation_lib = ctypes.CDLL(_LIB_PATH)
+a = c_int(0)
+b = c_int(0)
+c = c_int(0)
 
-_equation_lib.parse_eq.argtypes = [ctypes.c_char_p, ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int), ctypes.POINTER(ctypes.c_int)]
-_equation_lib.parse_eq.restype = None
+for eq in equations:
+    l.parseEq(eq.encode(), ctypes.byref(a), ctypes.byref(b), ctypes.byref(c))
+    print(f'a={a.value} b={b.value} c={c.value}')
+    a = c_int(0)
+    b = c_int(0)
+    c = c_int(0)
 
-
-def parse_eq(eq: str) -> dict:
-    """Return the quadratic coefficients a, b, c for the provided expression."""
-    a = ctypes.c_int()
-    b = ctypes.c_int()
-    c = ctypes.c_int()
-    _equation_lib.parse_eq(eq.encode("utf-8"), ctypes.byref(a), ctypes.byref(b), ctypes.byref(c))
-    return {"a": a.value, "b": b.value, "c": c.value}
-
-
-if __name__ == "__main__":
-    expr = e.Expression("3+2*x-x**2")
-    print(expr.equation(4))
