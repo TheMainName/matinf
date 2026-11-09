@@ -18,7 +18,7 @@ l.findMin.argtypes = [
 l.findMin.restype = None
 
 equations = [
-    "3+x-x**2",
+    "3 + x - x**2",
     "3 + x + x**2",
     "10 + (x − 4)**2",
     "2x**2 − 8x + 12",
@@ -27,13 +27,9 @@ equations = [
 failed = c_int(0)
 
 for eq in equations:
-    min = c_float(1.0)
+    min = c_float(0.0)
     l.findMin(eq.encode(),ctypes.byref(min), ctypes.byref(failed))
-    if failed.value == 1:
-        print("None")
-        continue
-
-    print(min.value)
+    print(failed.value)
     failed = c_int(0)
 
 

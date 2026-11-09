@@ -2,6 +2,7 @@ using namespace std;
 #include <string>
 #include <regex>
 #include <iostream>
+#include <cmath>
 
 extern "C" {
 int toCoef(const std::string& coef) // implicitly add 1 for unspecified a or b
@@ -85,28 +86,21 @@ void parseEq(const char* equationIn, int* a, int* b, int* c)
         *c += std::stoi(it->str());
 }
 
-void findMin(const char* equationIn,float* min, int* fail)
+void findMin(const char* equationIn,float* min, int* failed)
 {
     int a = 0, b = 0, c = 0;
     parseEq(equationIn, &a, &b, &c);
+    const float extremum = -1*b / (static_cast<float>(a)*2);
 
-    const float extr = (float)-1*a / (float)2*b;
+    *min = a*std::pow(extremum,2.0f)  + b*extremum +c;
     /* check if minimum or maximum was found;
-     * compare against some different x than found result
-     * extremum is greater => max was found => minimum does not exist
+     * create some dirrerent x than found result
+     * obviously works only for quadratic
      */
-    if (const float notExtr = a*(extr+1.0f)*(extr+1.0f) + b*(extr+1.0f) + c; extr > notExtr)
-    {
-        *fail = 1;
-        return;
+    if (
+        const float notExtremum = a*std::pow(extremum+1,2.0f)  + b*(extremum+1) +c;
+        *min > notExtremum ) {
+        *failed = 1;
     }
-    *min = extr;
-}
-
-void newtonFindMin(const char* equationIn, int* min)
-{
-    int a = 0, b = 0, c = 0;
-    parseEq(equationIn, &a, &b, &c);
-
 }
 }
