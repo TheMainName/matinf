@@ -85,17 +85,28 @@ void parseEq(const char* equationIn, int* a, int* b, int* c)
         *c += std::stoi(it->str());
 }
 
-void findMin(const char* equationIn,int* min)
+void findMin(const char* equationIn,float* min, int* fail)
 {
     int a = 0, b = 0, c = 0;
     parseEq(equationIn, &a, &b, &c);
-    *min = -1*a / 2*b;
+
+    const float extr = (float)-1*a / (float)2*b;
+    /* check if minimum or maximum was found;
+     * compare against some different x than found result
+     * extremum is greater => max was found => minimum does not exist
+     */
+    if (const float notExtr = a*(extr+1.0f)*(extr+1.0f) + b*(extr+1.0f) + c; extr > notExtr)
+    {
+        *fail = 1;
+        return;
+    }
+    *min = extr;
 }
 
 void newtonFindMin(const char* equationIn, int* min)
 {
     int a = 0, b = 0, c = 0;
     parseEq(equationIn, &a, &b, &c);
-    *min = -1* a / 2 * b;
+
 }
 }
