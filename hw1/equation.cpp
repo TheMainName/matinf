@@ -86,20 +86,20 @@ void parseEq(const char* equationIn, int* a, int* b, int* c)
         *c += std::stoi(it->str());
 }
 
-void findMin(const char* equationIn,float* min, int* failed)
+void findMin(const char* equationIn,float* x, float* y, int* failed)
 {
     int a = 0, b = 0, c = 0;
     parseEq(equationIn, &a, &b, &c);
-    const float extremum = -1*b / (static_cast<float>(a)*2);
 
-    *min = a*std::pow(extremum,2.0f)  + b*extremum +c;
+    *x = -1*b / (static_cast<float>(a)*2);
+    *y = a*std::pow(*x,2.0f)  + b* *x +c;
     /* check if minimum or maximum was found;
      * create some dirrerent x than found result
      * obviously works only for quadratic
      */
     if (
-        const float notExtremum = a*std::pow(extremum+1,2.0f)  + b*(extremum+1) +c;
-        *min > notExtremum ) {
+        const float notExtremum = a*std::pow(*x+1,2.0f)  + b*(*x+1) +c;
+        *y > notExtremum ) {
         *failed = 1;
     }
 }

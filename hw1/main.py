@@ -1,35 +1,33 @@
 import ctypes
-from ctypes import CDLL, c_int, c_char_p, c_float
+from ctypes import CDLL, c_int, c_char_p, c_float, byref, POINTER
 import os
+from expression import Equation
 
 l =  CDLL("./equation.so")
 l.parseEq.argtypes = [
     c_char_p,
-    ctypes.POINTER(c_int),
-    ctypes.POINTER(c_int),
-    ctypes.POINTER(c_int),
+    POINTER(c_int),
+    POINTER(c_int),
+    POINTER(c_int),
 ]
 l.parseEq.restype = None
+
 l.findMin.argtypes = [
     c_char_p,
-    ctypes.POINTER(c_float),
-    ctypes.POINTER(c_int)
+    POINTER(c_float),
+    POINTER(c_float),
+    POINTER(c_int)
 ]
 l.findMin.restype = None
 
-equations = [
-    "3 + x - x**2",
-    "3 + x + x**2",
-    "10 + (x − 4)**2",
-    "2x**2 − 8x + 12",
-]
-
-failed = c_int(0)
-
-for eq in equations:
+def find_minimum(eq : Equation):
+    eq_str = eq.expression(True)
     min = c_float(0.0)
-    l.findMin(eq.encode(),ctypes.byref(min), ctypes.byref(failed))
-    print(failed.value)
+    value = c_float(0.0)
     failed = c_int(0)
+    l.findMin(eq_str.encode(), byref(min), byref(value), byref(failed))
+    if failed:
+        return None,None
+    return min, value
 
 
