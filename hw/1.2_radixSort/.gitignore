@@ -1,0 +1,7 @@
+*debug/
+.idea/
+*.so
+*.o
+.venv/
+*__pycache__*
+cmake-build-debug/

@@ -1,0 +1,84 @@
+cmake_minimum_required(VERSION 4.3)
+project(05_game)
+
+set(CMAKE_CXX_STANDARD 23)
+
+include_directories(env/lib/python3.14/site-packages/numpy/_core/include)
+include_directories(env/lib/python3.14/site-packages/numpy/_core/include/numpy)
+include_directories(env/lib/python3.14/site-packages/numpy/_core/include/numpy/random)
+include_directories(env/lib/python3.14/site-packages/numpy/f2py/src)
+include_directories(env/lib64/python3.14/site-packages/numpy/_core/include)
+include_directories(env/lib64/python3.14/site-packages/numpy/_core/include/numpy)
+include_directories(env/lib64/python3.14/site-packages/numpy/_core/include/numpy/random)
+include_directories(env/lib64/python3.14/site-packages/numpy/f2py/src)
+
+add_executable(05_game
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/random/bitgen.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/random/distributions.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/random/libdivide.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/__multiarray_api.c
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/__multiarray_api.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/__ufunc_api.c
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/__ufunc_api.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/_neighborhood_iterator_imp.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/_numpyconfig.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/_public_dtype_api_table.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/arrayobject.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/arrayscalars.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/dtype_api.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/halffloat.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/ndarrayobject.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/ndarraytypes.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_2_compat.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_2_complexcompat.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_3kcompat.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_common.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_cpu.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_endian.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_math.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_no_deprecated_api.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/npy_os.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/numpyconfig.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/ufuncobject.h
+        env/lib/python3.14/site-packages/numpy/_core/include/numpy/utils.h
+        env/lib/python3.14/site-packages/numpy/_core/tests/data/generate_umath_validation_data.cpp
+        env/lib/python3.14/site-packages/numpy/_core/tests/examples/limited_api/limited_api1.c
+        env/lib/python3.14/site-packages/numpy/_core/tests/examples/limited_api/limited_api_latest.c
+        env/lib/python3.14/site-packages/numpy/f2py/src/fortranobject.c
+        env/lib/python3.14/site-packages/numpy/f2py/src/fortranobject.h
+        env/lib/python3.14/site-packages/numpy/f2py/tests/src/array_from_pyobj/wrapmodule.c
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/random/bitgen.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/random/distributions.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/random/libdivide.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/__multiarray_api.c
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/__multiarray_api.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/__ufunc_api.c
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/__ufunc_api.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/_neighborhood_iterator_imp.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/_numpyconfig.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/_public_dtype_api_table.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/arrayobject.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/arrayscalars.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/dtype_api.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/halffloat.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/ndarrayobject.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/ndarraytypes.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_2_compat.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_2_complexcompat.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_3kcompat.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_common.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_cpu.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_endian.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_math.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_no_deprecated_api.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/npy_os.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/numpyconfig.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/ufuncobject.h
+        env/lib64/python3.14/site-packages/numpy/_core/include/numpy/utils.h
+        env/lib64/python3.14/site-packages/numpy/_core/tests/data/generate_umath_validation_data.cpp
+        env/lib64/python3.14/site-packages/numpy/_core/tests/examples/limited_api/limited_api1.c
+        env/lib64/python3.14/site-packages/numpy/_core/tests/examples/limited_api/limited_api_latest.c
+        env/lib64/python3.14/site-packages/numpy/f2py/src/fortranobject.c
+        env/lib64/python3.14/site-packages/numpy/f2py/src/fortranobject.h
+        env/lib64/python3.14/site-packages/numpy/f2py/tests/src/array_from_pyobj/wrapmodule.c
+        player.cpp)
